@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Counter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Names;
+use App\Models\User;
 
 Route::view('/', 'welcome');
 
@@ -34,6 +36,28 @@ Route::get('/email', function (Request $request) {
 
     Mail::to("developerhabib1230@gmail.com")->send(new App\Mail\testMail($name));
     return redirect('/');
+});
+
+
+Route::get('/data', function (Request $request) {
+
+    $name = Names::where('name', 'Bob Builder')->first();
+
+    $description = $name->description;
+
+    $email = User::where('id', '3')->first()->email;
+
+    return response()->json(['description' => $description , 'email' => $email ]);
+
+});
+
+
+Route::get('/search', function (Request $request) {
+
+    $data = Names::search('Bob Builder')->get();
+
+    return response()->json($data);
+
 });
 
 
