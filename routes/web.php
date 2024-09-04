@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Counter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 Route::view('/', 'welcome');
@@ -24,8 +25,14 @@ Route::view('profile', 'profile')
 
 Route::get('/counter', Counter::class);
 
-Route::get('/email', function () {
-    Mail::to("developerhabib1230@gmail.com")->send(new App\Mail\testMail());
+Route::get('/email', function (Request $request) {
+
+    // Http query parameters
+    $name = $request->query('name');
+
+
+
+    Mail::to("developerhabib1230@gmail.com")->send(new App\Mail\testMail($name));
     return redirect('/');
 });
 

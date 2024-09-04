@@ -1,3 +1,3 @@
-Another successful email
+Another successful email for {{ $name }}
 
 
