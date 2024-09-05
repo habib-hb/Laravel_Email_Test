@@ -17,7 +17,7 @@ class Names extends Model
     protected $primaryKey = 'data_id';
 
     protected $connection = 'mysql_search';
-    
+
 
     public function searchableAs(): string
     {
@@ -27,10 +27,18 @@ class Names extends Model
 
     public function toSearchableArray(): array
     {
-        $array = $this->toArray();
+                        // $array = $this->toArray();
 
-        // Customize the data array...
+                        // // Customize the data array...
 
-        return $array;
+                        // return $array;
+
+        // Return only the name and description fields
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+            'gender' => $this->gender
+        ];
+
     }
 }

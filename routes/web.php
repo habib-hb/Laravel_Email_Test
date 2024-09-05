@@ -54,9 +54,14 @@ Route::get('/data', function (Request $request) {
 
 Route::get('/search', function (Request $request) {
 
-    $data = Names::search('Bob Builder')->get();
+    // Http query parameters
+    $name = $request->query('name');
 
-    return response()->json($data);
+    $data = Names::search($name)->get();
+
+    // return response()->json($data);
+
+    return view('search');
 
 });
 
